@@ -1,0 +1,42 @@
+html, body, .container-fluid {
+    height: 100%;
+
+    font-family: 'Roboto', sans-serif;
+}
+
+.container-fluid {
+    margin-top: 10vh;
+    margin-bottom: 10vh;
+}
+
+.player-view {
+    background-color: #d7ffa5;
+}
+
+.score-view {
+    background-color: #ff9c9b;
+}
+
+.player-view--opponent {
+    background-color: #aaa8ff;
+}
+
+.player-view, .player-view--opponent, .score-view {
+    height: 80vh;
+}
+
+@media (max-width: 992px) {
+
+    .container-fluid {
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+
+    .player-view, .player-view--opponent {
+        height: 40vh;
+    }
+
+    .score-view {
+        height: 20vh;
+    }
+}
