@@ -1,42 +1,274 @@
 html, body, .container-fluid {
-    height: 100%;
+	height      : 100%;
 
-    font-family: 'Roboto', sans-serif;
+	font-family : 'Roboto', sans-serif;
+}
+
+/* https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_variables
+Used to remove unnecessary work when there is a need to remove same color in different places.
+*/
+:root {
+	--score-view-container-color : #d3d1ff;
+	--player-color               : #A0FFA2;
+	--round-indicator-color      : #ff6363;
+	--time-indicator-color       : #e6edff;
+	--opponent-color             : #f9b288;
+	--draw-indicator-color       : #c3fffe;
+}
+
+img {
+	/* fixes height issue on mobile view */
+	max-height      : 100%;
+	max-width       : 100%;
+	display: block;
+	margin: 0 auto;
+
+}
+
+.move-icon {
+	max-height : 50px;
+	width      : auto;
+}
+
+.move-icon--button {
+	max-height : 10vh;
+	width      : auto;
 }
 
 .container-fluid {
-    margin-top: 10vh;
-    margin-bottom: 10vh;
+	padding : 0;
 }
 
-.player-view {
-    background-color: #d7ffa5;
+#score-view-container {
+	background : var(--score-view-container-color);
+}
+
+.player-color {
+	background-color : var(--player-color);
+}
+
+.round-indicator-color {
+	background-color : var(--round-indicator-color);
+}
+
+.time-indicator-color {
+	background-color : var(--time-indicator-color);
+}
+
+.opponent-color {
+	background-color : var(--opponent-color);
+
+}
+
+.draw-indicator-color {
+	background-color : var(--draw-indicator-color);
+}
+
+#player-view, #opponent-view, #score-view-container {
+	height : 100%;
+}
+
+#player-view, #opponent-view {
+	display: flex;
+	align-items: center;
+}
+
+.btn {
+	width : 100%;
+}
+
+.button-row {
+	padding: 0;
 }
 
 .score-view {
-    background-color: #ff9c9b;
+	padding: 15px 15px;
+	text-align : center;
 }
 
-.player-view--opponent {
-    background-color: #aaa8ff;
+.score-view__title {
+	font-size : 1em;
 }
 
-.player-view, .player-view--opponent, .score-view {
-    height: 80vh;
+.score-view__score {
+	font-size   : 1.25em;
+	font-weight : bold;
 }
 
-@media (max-width: 992px) {
+#moveHistory {
+	overflow-y : scroll;
+	height     : 20vh;
+	background : #f1f1f1;
+	font-size  : 2em;
 
-    .container-fluid {
-        margin-top: 0;
-        margin-bottom: 0;
+}
+
+.moveHistoryHeader {
+	font-size : 2em;
+}
+
+.moveHistoryContainer {
+	padding    : 15px; /* fixes misalignment problem */
+	text-align : center;
+	font-size  : 1em;
+	height     : 30vh;
+
+}
+
+.paddingCancel {
+	padding : 0;
+}
+
+.marginCancel {
+	margin : 0;
+}
+
+.moveButton {
+	height : 9vh;
+	margin : 0.5vh 0;
+}
+
+#stopButton {
+	font-size  : 2em;
+	background : #f65d55;
+	height     : 8vh;
+	margin     : 1.5vh 0;
+	width      : 100%;
+}
+
+#startButton {
+	font-size        : 2em;
+	background-color : #81f674;
+	height           : 15vh;
+	margin           : 1.5vh 0;
+	width            : 100%;
+}
+
+/* Mobile view */
+@media (max-width : 992px) {
+
+	img {
+		padding: 0;
+	}
+	.container-fluid {
+		padding-top    : 0;
+		padding-bottom : 0;
+	}
+
+	#player-view, #opponent-view {
+		height : 20vh;
+	}
+
+	.button-row {
+		padding: 0;
+		height : 50vh;
+	}
+
+	.moveHistoryContainer {
+		height : 45vh;
+	}
+
+	#score-view-container {
+		height  : 60vh;
+		padding : 0; /* individual elements already have enough padding */
+	}
+
+	.moveButton {
+		height : 10vh;
+		margin : 0.5vh 0;
+	}
+
+	#moveHistory {
+		height: 30vh;
+		font-size : 1em;
+	}
+
+    #stopButton {
+	    font-size: 1.5em;
     }
 
-    .player-view, .player-view--opponent {
-        height: 40vh;
-    }
+}
 
-    .score-view {
-        height: 20vh;
-    }
+/* Animations for better win/lose effects */
+@keyframes playerWinAnimation {
+	0% {
+		background-color : var(--player-color);
+	}
+	25% {
+		background-color : #9aff00;
+	}
+	50% {
+		background-color : #1aff00;
+	}
+	75% {
+		background-color : #81ff00;
+	}
+	100% {
+		background-color : var(--player-color);
+	}
+}
+
+@keyframes opponentWinAnimation {
+	0% {
+		background-color : var(--opponent-color);
+	}
+	25% {
+		background-color : #ff7d00;
+	}
+	50% {
+		background-color : #ff0100;
+	}
+	75% {
+		background-color : #ff7100;
+	}
+	100% {
+		background-color : var(--opponent-color);
+	}
+}
+
+@keyframes drawAnimation {
+	0% {
+		background-color : var(--draw-indicator-color);
+	}
+	25% {
+		background-color : #66f8ff;
+	}
+	50% {
+		background-color : #5153ff;
+	}
+	75% {
+		background-color : #7ec0ff;
+	}
+	100% {
+		background-color : var(--draw-indicator-color);
+	}
+}
+
+@keyframes imageMovementAnimation {
+	0% {
+		transform : rotate(0deg);
+	}
+	100% {
+		transform : rotate(360deg);
+	}
+}
+
+.player-win {
+	animation          : playerWinAnimation;
+	animation-duration : 1s;
+}
+
+.opponent-win {
+	animation          : opponentWinAnimation;
+	animation-duration : 1s;
+}
+
+.draw {
+	animation          : drawAnimation;
+	animation-duration : 1s;
+}
+
+.imageMovement {
+	animation          : imageMovementAnimation;
+	animation-duration : 1s;
 }
